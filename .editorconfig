@@ -1,0 +1,15 @@
+root = true
+
+[*.{md,py,toml,json,yaml}]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+indent_style = space
+
+[*.{md,py,toml,json}]
+indent_size = 4
+
+[*.{yaml}]
+# YAML indentation looks best when it is 2 due to `- `.
+indent_size = 2

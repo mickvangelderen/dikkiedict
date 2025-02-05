@@ -1,0 +1,33 @@
+{
+    "git.openRepositoryInParentFolders": "always",
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            // "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+        }
+    },
+    "editor.formatOnSave": true,
+    // Disable automatic environment activation because it makes switching
+    // environments difficult with pixi.
+    "python.terminal.activateEnvironment": false,
+    // `pyright` requires the `.json` extension but can parse JSON with Comments.
+    "files.associations": {
+        "pyrightconfig.ci.json": "jsonc",
+    },
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "pyrightconfig.ci.json"
+            ],
+            "schema": {
+                "allowTrailingCommas": true
+            }
+        }
+    ],
+    "files.exclude": {
+        "**/__pycache__/": true,
+        "**/*.egg-info/": true,
+        "**/.ruff_cache/": true
+    },
+}
