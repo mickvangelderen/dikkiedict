@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Make it easy to implement conversion from and to dict-like types."
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "frozendict>=2.4.6",
+]
 
 [dependency-groups]
 dev = [

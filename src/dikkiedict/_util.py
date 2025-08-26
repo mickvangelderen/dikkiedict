@@ -2,7 +2,7 @@ from collections.abc import Callable
 from typing import ParamSpec, TypeVar, overload
 
 
-def ft(cls):
+def ft(cls: object):
     """Format a type for in error strings."""
     if hasattr(cls, "__module__") and cls.__module__ not in ["__main__", "builtins"]:
         return f"`{cls.__module__}.{cls.__qualname__}`"
@@ -10,7 +10,7 @@ def ft(cls):
         return f"`{cls.__qualname__}`"
 
 
-def fv(value):
+def fv(value: object):
     """Format a value for in error strings."""
     return f"`{repr(value)}`"
 
@@ -18,22 +18,22 @@ def fv(value):
 T = TypeVar("T")
 
 
-def expect_instance(value, type_: type[T]) -> T:
+def expect_instance(value: object, type_: type[T]) -> T:
     if isinstance(value, type_):
         return value
     else:
         raise TypeError(f"expected a value of type {ft(type_)} but got type {ft(type(value))} from value {fv(value)}")
 
 
-def expect_str(value) -> str:
+def expect_str(value: object) -> str:
     return expect_instance(value, str)
 
 
-def expect_dict(value) -> dict:
-    return expect_instance(value, dict)
+def expect_dict(value: object) -> dict:  # pyright: ignore[reportUnknownParameterType, reportMissingTypeArgument]
+    return expect_instance(value, dict)  # pyright: ignore[reportUnknownVariableType]
 
 
-def expect_type(value) -> type:
+def expect_type(value: object) -> type:
     return expect_instance(value, type)
 
 

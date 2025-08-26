@@ -1,14 +1,14 @@
-import dataclasses
-from collections.abc import Callable, MutableMapping
-from dataclasses import Field, is_dataclass
-from enum import Enum, StrEnum
-from types import NoneType, UnionType
-from typing import Any, TypeVar, Union, get_args, get_origin
-from weakref import WeakKeyDictionary
+# import dataclasses
+# from collections.abc import Callable, MutableMapping
+# from dataclasses import Field, is_dataclass
+# from enum import Enum, StrEnum
+# from types import NoneType, UnionType
+# from typing import Any, TypeVar, Union, get_args, get_origin
+# from weakref import WeakKeyDictionary
 
-from ._util import class_decorator, expect_dict, expect_str, expect_type, ft, fv
+# from ._util import class_decorator, expect_dict, expect_str, expect_type, ft, fv
 
-_class_to_tag_name: MutableMapping[type, str] = WeakKeyDictionary()
+# _class_to_tag_name: MutableMapping[type, str] = WeakKeyDictionary()
 
 
 # def register_tag_name(cls: type, tag_name: str):
@@ -134,35 +134,35 @@ _class_to_tag_name: MutableMapping[type, str] = WeakKeyDictionary()
 # list      # value like
 # dataclass # dict like
 
-T = TypeVar("T")
+# T = TypeVar("T")
 
 # Type[T] -> T has a strange behaviour https://github.com/python/mypy/issues/9003#issuecomment-734648129
 # TypeVar incompatible with constrained union https://github.com/python/mypy/issues/9424
 # TypeForm[T]: Spelling for regular types (int, str) & special forms (Union[int, str], Literal['foo'], etc) https://github.com/python/mypy/issues/9773
 
 
-def is_union(type_) -> bool:
-    return isinstance(type_, UnionType)
+# def is_union(type_) -> bool:
+#     return isinstance(type_, UnionType)
 
 
-def dataclass_field_from_dict(field: Field, obj: dict):
-    if is_union(field.type) is Union:
-        types = get_args(field.type)
-        if NoneType in types:
-            if field.name in obj:
-                
-        
-        raise ValueError("UNION", can_be_none, get_args(field.type))
-    else:
-        pass
+# def dataclass_field_from_dict(field: Field, obj: dict):
+#     if is_union(field.type) is Union:
+#         types = get_args(field.type)
+#         if NoneType in types:
+#             if field.name in obj:
 
 
-def from_dict(cls: type[T], obj) -> T:
-    if is_dataclass(cls):
-        obj = expect_dict(obj)
-        fields = dataclasses.fields(cls)
-        return cls(**{field.name: dataclass_field_from_dict(field, obj) for field in fields})
+#         raise ValueError("UNION", can_be_none, get_args(field.type))
+#     else:
+#         pass
 
-    # TODO: dict
 
-    raise ValueError(f"Unsupported type {ft(cls)}")
+# def from_dict(cls: type[T], obj) -> T:
+#     if is_dataclass(cls):
+#         obj = expect_dict(obj)
+#         fields = dataclasses.fields(cls)
+#         return cls(**{field.name: dataclass_field_from_dict(field, obj) for field in fields})
+
+#     # TODO: dict
+
+#     raise ValueError(f"Unsupported type {ft(cls)}")
