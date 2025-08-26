@@ -3,7 +3,7 @@ name = "dikkiedict"
 version = "0.1.0"
 description = "Make it easy to implement conversion from and to dict-like types."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 dependencies = []
 
 [dependency-groups]
@@ -18,12 +18,16 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.ruff]
-line-length = 120
-target-version = "py311"
-include = [
-    "pyproject.toml",
-    "src/**/*.py",
+extend-exclude = [
+    "**/__pycache__/",
+    "**/.egg-info/",
+    "**/.pytest_cache/",
+    "**/.ruff_cache/",
+    "**/.venv/",
+    ".git/",
 ]
+line-length = 120
+target-version = "py313"
 
 [tool.ruff.lint]
 ignore = [
@@ -57,13 +61,25 @@ convention = "google"
 "*.ipynb" = ["D"]
 
 [tool.pyright]
-typeCheckingMode = "standard"
-include = ["src"]
-exclude = [
-    "**/__pycache__"
-]
+typeCheckingMode = "strict"
 reportPrivateImportUsage = "none" # some libraries do not properly re-export their types, see https://github.com/microsoft/pyright/issues/2639
-
+exclude = [
+    "**/__pycache__/",
+    "**/.egg-info/",
+    "**/.pytest_cache/",
+    "**/.ruff_cache/",
+    "**/.venv/",
+    ".git/",
+]
 
 [tool.pytest.ini_options]
-testpaths = ["src"]
+addopts = [
+    "--import-mode=importlib",
+    "--strict-markers",
+]
+markers = ["slow"]
+log_level = "INFO"
+filterwarnings = [
+]
+testpaths = ["src", "tests"]
+python_functions = ["test_*"]
